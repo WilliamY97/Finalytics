@@ -1,0 +1,79 @@
+    {% extends "base.html" %}
+    {% block content %}
+    <link href="css/about.css" rel="stylesheet">
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner carouselimage" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="images/about2.png" alt="First slide">
+        </div>
+      </div>
+    </div>
+
+    <div class="overview">
+      <div class="container text-center">
+        <p class="banner">An all in one dashboard for financial portfolio visualization, analytics, and optimization.</p>
+      </div>
+    </div>
+
+    <div class="container custom-size">
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <div>
+            <h2 class="title">What is Finalytics?</h2>
+            <br>
+            <p class="description-body">Launched in September 2012, it was built by four students in Software Engineering at the University of Waterloo. What does the name mean? Well, we're not sure ourselves... we launched with it, and it just sort of stuck!</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-lg-offset-3">
+          <div>
+            <h2 class="title">Finalytics is open-sourced</h2>
+            <br>
+            <p class="description-body">Want to contribute? Check out the code on GitHub.</p>
+            <p class="description-body">Not sure where to start? Perhaps you can tackle one of these issues.</p>
+            <p class="description-body">Have questions? Come hang out with us in our public chat room.</p>
+            <p class="description-body">Want to fork Flow to be a white-labelled platform for your school? Awesome — go for it. Just be wary that the data scrapers are tied to Waterloo’s APIs.</p>
+            <p class="description-body">Read our blog post about why we open-sourced .</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-lg-offset-3">
+          <div>
+            <h2 class="heavy-weight">Team</h2>
+            <hr size="3"> 
+          </div>
+
+          <div class="col-lg-2 img-fix-size">
+            <img class="profile_pic" src="images/spongebob.png">
+          </div>
+          <div class="member col-lg-8">
+            <h2 class="heavy-weight">Alex Chen</h2>
+            <p class="role-title">CO-FOUNDER, SOFTWARE ENGINEERING</p>
+            <a class="links" href=""><img class="social-media" src="images/social-media/github.svg">Github</a>            
+            <a href=""><img class="social-media" src="images/social-media/linkedin.png">LinkedIn</a>
+            <a href=""><img class="social-media" src="images/social-media/facebook.png">Facebook</a>
+            <br>
+            <br>
+            <p class="description-body">Alex is a student of Computing and Financial Management at the University of Waterloo. In his free time he enjoys zooming out and breathing air. His primary interest is in coding for finance related projects. He hopes to pursue a future doing so in industry. </p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-lg-offset-3">
+          <div class="col-lg-2 img-fix-size">
+            <img class="profile_pic" src="images/spongebob.png">
+          </div>
+          <div class="member col-lg-8">
+            <h2 class="heavy-weight">William Yang</h2>
+            <p class="role-title">CO-FOUNDER, SOFTWARE ENGINEERING</p>
+            <a class="links" href=""><img class="social-media" src="images/social-media/github.svg">Github</a>
+            <a class="links" href=""><img class="social-media" src="images/social-media/linkedin.png">LinkedIn</a>
+            <a href=""><img class="social-media" src="images/social-media/facebook.png">Facebook</a>
+            <br>
+            <br>
+            <p class="description-body">William is a student of Computer Engineering at the University of Waterloo. In his spare time he loves to suffer from the excessive workload of his program. Although, he enjoys learning more about coding, foreign languages, and travelling equally as much. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}

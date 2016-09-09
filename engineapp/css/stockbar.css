@@ -1,0 +1,76 @@
+/*body {
+  background: #171E2E;
+}*/
+
+#stockbar{
+/*  background-color: #171E2E;*/
+  background-color: #000;
+  padding: 10px;
+}
+
+#Stocks { 
+  width: 100%;
+  display: block;
+  min-height: 1em;
+  color: #FFF;
+  padding: 20px;
+  vertical-align: middle;
+  line-height: 1.4;
+  text-align: center;
+  transform: translateZ(0);
+  cursor: pointer;
+  font-size: large;
+  font-family: "Roboto", Helvetica;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.stockTicker {
+    list-style-type: none;
+    position: relative;
+    list-style: none;
+}
+
+.container {
+    width: 100%;
+    /*padding:20px;*/
+/*    background: #190b2f;*/
+}
+.container .wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    line-height: normal;
+    font-size-adjust: none;
+}
+
+.stockTicker li,
+.stockTicker span {
+    margin: 0 10px 0;
+    display: inline-block;
+}
+
+
+.container .wrap {
+    overflow: hidden;
+
+}
+
+.container b { font-weight: 300; }
+.container i { font-style: normal; }
+
+.container .Name,
+.container .Label,
+.container .LastUpdated { font-size: 0.7em; line-height: 1; }
+
+.container span { 
+  white-space: nowrap;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.container .Symbol,
+.container .Stat { color: #88bd0a; }
+
+
+

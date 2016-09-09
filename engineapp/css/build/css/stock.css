@@ -1,0 +1,43 @@
+
+.title-inline {
+	display: inline-block;
+}
+
+.small-inline {
+	margin-left: 20px;
+}
+
+.tiny-inline {
+	margin-left: 10px;
+}
+
+.rec-inline {
+	margin-left: 10px;
+	font-size: 20px;
+}
+
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+}
+
+span.stock_attr{
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+span.stock_val{
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+#master_panel {
+	visibility: hidden;
+}
+
+#stockSymbol {
+	text-transform: uppercase;
+}

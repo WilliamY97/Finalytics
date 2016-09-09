@@ -1,0 +1,312 @@
+@font-face { font-family: AvenirNextLTPro-Regular; src: url('../fonts/AvenirNextLTPro-Regular.otf'); } 
+
+body {
+    font-family: "AvenirNextLTPro-Regular", "Roboto";
+    color: white;
+    font-weight: 300;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+display: block;
+height: 560px;
+line-height: 1;
+width: 100%; // Add this
+}
+
+.btn-finalytic {
+
+  background-color: #265a88;
+  background-repeat: repeat-x;
+
+}
+
+.btn-finalytic:hover,
+.btn-finalytic:focus {
+background-image: -webkit-linear-gradient(top, #337ab7 0%, #265a88 100%);
+  background-image:      -o-linear-gradient(top, #337ab7 0%, #265a88 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#337ab7), to(#265a88));
+  background-image:         linear-gradient(to bottom, #337ab7 0%, #265a88 100%);
+  background-color: #265a88;
+  font-color: white;
+  background-position: 0 -15px;
+}
+
+.descrip {
+    text-shadow: 0px 0px 0px black;
+    font-family: "AvenirNextLTPro-Regular", "Roboto";
+    color: #222;
+    background-image: url(../images/pattern.jpg); 
+    background-color:white;
+    padding-top: 60px;
+    display:block;
+    overflow:auto;
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom:60px;
+}
+
+.lander {
+    font-family: "AvenirNextLTPro-Regular", "Roboto";
+    background-color:#222;
+    padding-top: 10px;
+    padding-bottom: 60px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.lander h3{
+    margin-top:0px;
+}
+
+
+.navbar h3{  
+  font-family: "AvenirNextLTPro-Regular", "Roboto";
+}
+
+.navbar b{  
+  font-family: "AvenirNextLTPro-Regular", "Roboto";
+  font-size:20px;
+}
+
+.navbar-brand {
+    font-family: "AvenirNextLTPro-Regular", "Roboto";
+    font-color: white;
+    font-size:30px;
+}
+
+.carousel-caption {
+    top: 0;
+    bottom: auto;
+    padding-top:135px;
+}
+
+.carousel h1 {
+    font-family: "AvenirNextLTPro-Regular", "Roboto";
+    font-size: 100px;
+}
+
+.carousel p {
+    text-shadow: 1px 1px 11px black;
+    margin-top:30px;
+    font-size: 21px;    
+}
+
+.bs-docs-footer{
+    font-family: "AvenirNextLTPro-Regular", "Roboto";
+    background-color: #000;
+    height:40px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.jumbotron {
+    padding-top:80px;
+}
+
+.jumbotron p {
+    text-shadow: 1px 1px 11px black;
+    margin-top:30px;    
+}
+
+.jumboimage {
+    max-width: 100%;
+    background-size: cover;
+    background-image: url(../images/stock2.jpg);
+    background-repeat: no-repeat;
+    height:500px;
+    text-shadow: 2px 2px 50px black;    
+}
+
+.carouselimage {
+    max-width: 100%;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-shadow: 2px 2px 50px black;    
+}
+
+.jumboimage h1 {
+    font-family: "AvenirNextLTPro-Regular", "Roboto";
+    font-size: 100px;
+}
+
+.jumboimage p {
+    font-family: "AvenirNextLTPro-Regular", "Roboto";
+}
+
+@media screen and (max-width:1550px) {
+
+    .carousel h1 {
+    font-size: 70px;
+    margin-top:0px; 
+    }
+
+
+    .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+
+    display: inline-block;
+    height: 560px;
+    width:100%;
+    width: none; // Add this
+
+    }
+
+}    
+
+@media screen and (max-width:950px) {
+    .title-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .carousel b{
+        font-size:60px;
+    }
+
+    .title-super {
+        font-size: 30px;
+    }
+
+    .text-muted {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+    }
+
+    .text-uppercase {
+        font-size: 15px;
+    }
+
+    a {
+        font-size: 12px;
+    }
+
+    .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+
+    display: inline-block;
+    height: 560px;
+    width:auto;
+    width: none; // Add this
+
+    }
+
+    .carousel h1 {
+    font-size: 20px;
+    margin-top:0px; 
+    }
+
+}
+
+
+
+@media screen and (max-width:360px) {
+    .subtitle {
+        font-size: 10px;
+    }
+
+    .carousel-caption{
+        font-size: 5px;
+    }
+
+    .carousel b{
+        font-size:40px;
+    }
+
+    .carousel p{
+        font-size:20px;
+    }
+
+    .carousel h1 {
+    font-size: 10px;
+    margin-top:0px; 
+    }
+
+    .col-sm-4 img {
+        height:100px;
+        width:100px;
+
+    }
+
+    .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+
+    display: inline-block;
+    height: 560px;
+    line-height: 0;
+    width:auto;
+    width: none; // Add this
+
+    }
+
+    .bs-docs-footer{
+    height:60px;
+    }
+}
+
+#site-description{
+    color: black;
+    padding: 20px;
+}
+
+.overview{
+  background-color: #161C22;
+  padding: 60px;
+}
+
+.banner{
+    font-size: 30px;
+}
+
+.description-text {
+    font-size: 1.75rem;
+    color: #565a5c;
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+.description-title {
+    color: #565a5c;
+
+}
+
+/***********************************************************************
+*  OPAQUE NAVBAR SECTION
+***********************************************************************/
+.opaque-navbar {
+    background-color: rgba(0,0,0,0.5);
+  /* Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)  */
+    border-bottom: 0px;
+/*    transition: background-color .5s ease 0s;*/
+}
+
+.opaque-navbar.opaque {
+    background-color: black;
+    height: 60px;
+    transition: background-color .5s ease 0s;
+}
+
+ul.dropdown-menu {
+    background-color: black;
+}
+
+
+@media (max-width: 992px) {
+  .opaque-navbar {
+    background-color: black;
+    height: 60px;
+/*    transition: background-color .5s ease 0s;*/
+}
+
+}
+
+.navbar-fixed-top{
+    top:36px;
+    position: absolute;
+}

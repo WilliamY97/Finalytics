@@ -1,0 +1,72 @@
+.signuprow {
+	padding:40px;
+	width: 100vw;
+    height: 100vh;
+    background-color: #161C22;
+}
+
+
+hr {
+    height: 2px;
+    border: none;
+    background-image: linear-gradient(to right, rgba(136,136,144,0) 0%,#161C22 5%,#161C22 95%,rgba(136,136,144,0) 100%);
+    display: block;
+    margin-top: 3.4rem;
+    margin-left: -20px;
+    margin-right: -20px;
+    opacity: 0.6;
+	margin-bottom: 3.4rem;
+}
+
+#outer{
+    width:100%;
+    height: 100%;
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+
+    /* Safari and Chrome */
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+
+    /* W3C */
+    display:box;
+    box-pack:center;
+    box-align:center;
+}
+
+.master-form {
+/*    border: 1px solid white;*/
+    padding: 30px;
+    background-color: white;
+    color: #565a5c;
+    min-width: 430px;
+    max-width: 430px;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+#btnSignIn {
+    color: white;
+}
+
+.header-size {
+    margin-bottom: 15px;
+}
+
+.vertical-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+label {
+    font-size: 20px;
+}
+
+#homebutton, #loginbutton {
+    color: #565a5c;
+}

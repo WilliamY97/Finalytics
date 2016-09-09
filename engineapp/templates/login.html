@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico'/ >  
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Finalytics</title>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/login.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300|Lobster|Roboto:700" rel="stylesheet">
+        <link href="css/stockbar.css" rel="stylesheet">
+        <script type="text/javascript" src="js/modernizr.js"></script>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/marquee.js"></script>
+        <script type="text/javascript" src="js/stockbar.js"></script>
+        <script src="js/jquery.marquee.js" type="text/javascript"></script>
+    </head>
+    <body>
+
+      <link href="css/signup.css" rel="stylesheet">
+       <script src="js/jquery-1.11.2.js"></script>
+      <script src="js/signIn.js"></script>  
+      
+      <div class = "signuprow">
+
+          <form id="signInForm" role="form" class="form-horizontal form-signin vertical-center" action = "/validateLogin" method="post">
+            <fieldset>
+              <div class="container">
+                <header class="text-center">
+                  <h1><b>Finalytics</b></h1>
+                </header>
+
+                <div id="outer">
+                  <div class="form-group row master-form">
+                    <div class="form-group row text-center header-size">
+                      <h3>Log in to your account</h3>
+                      <hr>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputEmail" class="col-xs-4 col-form-label">Email</label>
+                      <div class="col-xs-8">
+                        <input type="email" name="inputEmail" id="inputEmail" class="form-control" required autofocus>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputPassword" class="col-xs-4 col-form-label">Password</label>
+                      <div class="col-xs-8">
+                        <input type="password" name="inputPassword" id="inputPassword" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-xs-12">
+                        <button id="btnSignIn" class="btn btn-block btn-finalytic btn-lg" type="submit">Login</button>
+                      </div>
+                    </div>
+                    <div class="form-group row text-center">
+                      <div class="col-xs-12">
+                        <a id="homebutton" href="/"><b>Back to Home</b></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+          </form>
+
+      </div>
+
+    </body>
+
+</html>

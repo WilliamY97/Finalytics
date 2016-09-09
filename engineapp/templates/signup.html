@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico'/ >  
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Finalytics</title>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/login.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300|Lobster|Roboto:700" rel="stylesheet">
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+      <link href="css/signup.css" rel="stylesheet">
+       <script src="js/jquery-1.11.2.js"></script>
+      <script src="js/signIn.js"></script>  
+      
+      <div class = "signuprow">
+
+          <form id="signInForm" role="form" class="form-horizontal form-signin vertical-center" action = "/validateLogin" method="post">
+            <fieldset>
+              <div class="container">
+                <header class="text-center">
+                  <h1><b>Finalytics</b></h1>
+                </header>
+
+                <div id="outer">
+                  <div class="form-group row master-form">
+                    <div class="form-group row text-center header-size">
+                      <h3>Register your account</h3>
+                      <hr>
+                    </div>
+                    <div class="form-group row">
+                      <label for="firstname" class="col-xs-4 col-form-label">First Name</label>
+                      <div class="col-xs-8">
+                        <input type="text" id="firstname" name="firstname" placeholder="First name" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="lastname" class="col-xs-4 col-form-label">Last Name</label>
+                      <div class="col-xs-8">
+                        <input type="text" id="lastname" name="lastname" placeholder="Last name" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="email" class="col-xs-4 col-form-label">Email</label>
+                      <div class="col-xs-8">
+                        <input type="text" id="email" name="email" placeholder="Email" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="password" class="col-xs-4 col-form-label">Password</label>
+                      <div class="col-xs-8">
+                        <input type="password" id="password" name="password" placeholder="Password" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="password_confirm" class="col-xs-4 col-form-label">Confirm Password</label>
+                      <div class="col-xs-8">
+                        <input type="password" id="password_confirm" name="password_confirm" placeholder="Confirm Password" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-xs-12">
+                        <button id="btnSignIn" class="btn btn-block btn-finalytic btn-lg" type="button">Create Free Account</button>
+                      </div>
+                    </div>
+
+                    <div class="form-group row text-center">
+                      <div class="col-xs-12">
+                        <b>Already have account? </b><a id="loginbutton" href="/login"><b>Login</b></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+          </form>
+
+      </div>
+
+    </body>
+
+</html>
