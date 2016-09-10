@@ -20,6 +20,9 @@ app.config['MYSQL_DATABASE_DB'] = 'shit'
 app.config['MYSQL_DATABASE_HOST'] = '127.0.0.1'
 mysql.init_app(app)
 
+conn = mysql.connect()
+cursor = conn.cursor()
+
 class User(object):
     email = ""
     first_name = ""
@@ -53,10 +56,6 @@ class Ticker(object):
 portfolio = {}
 
 def addUser(firstname,lastname,email,password):
-    # assert False
-    conn = mysql.connect()
-    cursor = conn.cursor()
-
     _hashed_password = generate_password_hash(password)
     cursor.callproc('sp_createUser',(firstname,lastname,email,_hashed_password))
 
@@ -64,16 +63,11 @@ def addUser(firstname,lastname,email,password):
  
     if len(data) is 0:
         conn.commit()
-        cursor.close()
-        conn.close()
         return jsonify({'message':'User created successfully !'})
     else:
         return jsonify({'error':str(data[0])})
 
-def signInUser(logInEmail,logInPassword):
-    
-    conn = mysql.connect()
-    cursor = conn.cursor()
+def signInUser(logInEmail,logInPassword):    
     s = cursor.User.query.filter_by(logInEmail = email).first()
     if check_password_hash(s.password,logInPassword):
         return jsonify({'html':'<span>Log In Successful!</span>'})
@@ -83,22 +77,33 @@ def signInUser(logInEmail,logInPassword):
 
 @app.route('/submitShares', methods=['POST'])
 def submitShares():
-    # ticker = request.form['ticker']
-    # quantity = request.form['quantity']
-    ticker = 'YHOO'
-    quantity = 300
+    print repr(request.form)
+    print repr(request.data)
+
+    ticker = request.form['ticker']
+    #ticker = "AAPL"
+    quantity = request.form['quantity']
     conn = mysql.connect()
     cursor = conn.cursor()
-    user = cursor.execute("SELECT id FROM User where email = '%s'" % pickle.loads(session['u2']).email)
+    email = pickle.loads(session['u2']).email
+    print email
+    query = "SELECT id FROM User where email = '%s'" % email
+    print query
+    cursor.execute(query)
+    user = cursor.fetchone()
+    print user
+    print pickle.loads(session['u2']).email
     #user = cursor.User.query.filter_by(email = pickle.loads(session['u2']).email).first()
     userPortfolio = cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
     #userPortfolio = cursor.Portfolio.query.filter_by(user_id = user.id).first()
     portfolio[ticker] = Ticker(ticker,quantity)
-    cursor.callproc('sp_addStock',(pickle.dumps(portfolio), userPortfolio))
-    #query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
-    #cursor.execute(query)
+    #print pickle.dumps(portfolio)
+    #portfolio = "text"
+    # cursor.callproc('sp_addStock',(portfolio, userPortfolio))
+    query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
+    cursor.execute(query)
     data = cursor.fetchall()
- 
+    print data
     if len(data) is 0:
         conn.commit()
         cursor.close()
@@ -118,10 +123,7 @@ def home():
 @app.route('/dashboard')
 def dashboard():
     if session.get('user'):
-
         try: 
-            conn = mysql.connect()
-            cursor = conn.cursor()
             cursor.callproc('sp_getPortfolio',(session['user'],))
             result = cursor.fetchall()
 
@@ -139,18 +141,12 @@ def dashboard():
         except Exception as e:
             return render_template('error.html',error = str(e))
 
-        cursor.close()
-        conn.close()
-
-
     else:
         return redirect('/login')
 
 @app.route('/stocklookup', methods=('GET',))
 def stockLookUp():
     if session.get('user'):
-        conn = mysql.connect()
-        cursor = conn.cursor()
         return render_template('%s.html' % 'dashboard/production/stockLookup')
     else:
         return render_template('error.html',error = 'Unauthorized Access')        
@@ -198,10 +194,7 @@ def validateLogin():
         _username = request.form['inputEmail']
         _password = request.form['inputPassword']
  
-        # connect to mysql
- 
-        con = mysql.connect()
-        cursor = con.cursor()
+        # connect to mysql 
         cursor.callproc('sp_validateLogin',(_username,))
         data = cursor.fetchall()
 
@@ -219,9 +212,6 @@ def validateLogin():
  
     except Exception as e:
         return render_template('error.html',error = str(e))
-
-    cursor.close()
-    con.close()
 
 @app.route('/logout')
 def logout():

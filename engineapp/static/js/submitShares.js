@@ -1,7 +1,9 @@
 $(function(){
-	$('button').click(function(){
+	$('#addstock').click(function(e){
+		e.preventDefault();
 		var data = $('form').serialize();
-		data['ticker'] = $('#symbol').innerHTML;
+		data += '&ticker=' + $('#symbol').text();
+		console.log(data);
 
 		$.ajax({
 			url: '/submitShares',
