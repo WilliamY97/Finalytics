@@ -87,9 +87,9 @@ def submitShares():
     query = "SELECT id FROM User where email = '%s'" % email
     cursor.execute(query)
     user = cursor.fetchone()[0]
-    
+
     cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
-    userPortfolio = cursor.fetchone[0]
+    userPortfolio = cursor.fetchone()[0]
     portfolio[ticker] = Ticker(ticker,quantity)
     query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
     cursor.execute(query)
