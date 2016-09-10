@@ -82,19 +82,18 @@ def signInUser(logInEmail,logInPassword):
 def submitShares():
     ticker = request.form['ticker']
     quantity = request.form['quantity']
-    conn = mysql.connect()
-    cursor = conn.cursor()
     email = pickle.loads(session['u2']).email
 
     query = "SELECT id FROM User where email = '%s'" % email
     cursor.execute(query)
-    user = cursor.fetchone()
+    user = cursor.fetchone()[0]
     
-    userPortfolio = cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
+    cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
+    userPortfolio = cursor.fetchone[0]
     portfolio[ticker] = Ticker(ticker,quantity)
     query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
     cursor.execute(query)
-    data = cursor.fetchall()
+    cursor.commit()
 
 
 @app.route('/')
