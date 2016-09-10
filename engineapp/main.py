@@ -91,6 +91,10 @@ def submitShares():
     cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
     userPortfolio = cursor.fetchone()[0]
     portfolio[ticker] = Ticker(ticker,quantity)
+
+    cursor.execute("select tickers from Portfolio where user_id = %i" % get_user_id())
+    port=pickle.loads(cursor.fetchone()[0])
+    portfolio.update(port)
     query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
     cursor.execute(query)
     conn.commit()
