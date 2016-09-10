@@ -23,6 +23,12 @@ mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
 
+def get_user_id():
+    email = pickle.loads(session['u2']).email
+    query = "SELECT id FROM User where email = '%s'" % email
+    cursor.execute(query)
+    return cursor.fetchone()[0]
+
 class User(object):
     email = ""
     first_name = ""
@@ -46,9 +52,6 @@ class User(object):
         return self.last_name
 
 class Ticker(object):
-    name = ""
-    quantity = ""
-
     def __init__(self,name,quantityShares):
         self.name = name
         self.quantityShares = quantityShares 
@@ -81,7 +84,6 @@ def submitShares():
     print repr(request.data)
 
     ticker = request.form['ticker']
-    #ticker = "AAPL"
     quantity = request.form['quantity']
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -93,13 +95,8 @@ def submitShares():
     user = cursor.fetchone()
     print user
     print pickle.loads(session['u2']).email
-    #user = cursor.User.query.filter_by(email = pickle.loads(session['u2']).email).first()
     userPortfolio = cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
-    #userPortfolio = cursor.Portfolio.query.filter_by(user_id = user.id).first()
     portfolio[ticker] = Ticker(ticker,quantity)
-    #print pickle.dumps(portfolio)
-    #portfolio = "text"
-    # cursor.callproc('sp_addStock',(portfolio, userPortfolio))
     query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
     cursor.execute(query)
     data = cursor.fetchall()
@@ -123,23 +120,26 @@ def home():
 @app.route('/dashboard')
 def dashboard():
     if session.get('user'):
-        try: 
-            cursor.callproc('sp_getPortfolio',(session['user'],))
-            result = cursor.fetchall()
+        # try: 
+            # cursor.callproc('sp_getPortfolio',(session['user'],))
+            # result = cursor.fetchall()
 
             # logging.info('length of sp_getPortfolio result is ' + len(result))
             
-            portfolios = []
-            for portfolio in result:
-                portfolio_list = {
-                        'name': portfolio[0],
-                        'symbol': portfolio[1],
-                        'cap': portfolio[2]}
-                portfolios.append(portfolio_list)  
+            # portfolios = []
+            # for portfolio in result:
+            #     portfolio_list = {
+            #             'name': portfolio[0],
+            #             'symbol': portfolio[1],
+            #             'cap': portfolio[2]}
+            #     portfolios.append(portfolio_list)  
 
-            return render_template('%s.html' % 'dashboard/production/index2', portfolios = portfolios)
-        except Exception as e:
-            return render_template('error.html',error = str(e))
+            cursor.execute("select tickers from Portfolio where user_id = %i" % get_user_id())
+            port=pickle.loads(cursor.fetchone()[0]).values()
+
+            return render_template('%s.html' % 'dashboard/production/index2', portfolios = port)
+        # except Exception as e:
+        #     return render_template('error.html',error = str(e))
 
     else:
         return redirect('/login')
