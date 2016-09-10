@@ -93,7 +93,7 @@ def submitShares():
     portfolio[ticker] = Ticker(ticker,quantity)
     query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
     cursor.execute(query)
-    cursor.commit()
+    conn.commit()
 
 
 @app.route('/')
