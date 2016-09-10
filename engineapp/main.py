@@ -1,6 +1,6 @@
 import os
 import logging
-# from flask.ext.mysql import MySQL
+from flask.ext.mysql import MySQL
 from flask import Flask, render_template, json, request
 from flask import session, redirect
 from werkzeug import generate_password_hash, check_password_hash
@@ -11,12 +11,12 @@ template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 
 app.secret_key = 'why would I tell you my secret key?'
 
-# mysql = MySQL()
-# app.config['MYSQL_DATABASE_USER'] = 'root'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'superflyinghippocow'
-# app.config['MYSQL_DATABASE_DB'] = 'finalytics'
-# app.config['MYSQL_DATABASE_HOST'] = '173.194.86.213'
-# mysql.init_app(app)
+mysql = MySQL()
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'superflyinghippocow'
+app.config['MYSQL_DATABASE_DB'] = 'finalytics'
+app.config['MYSQL_DATABASE_HOST'] = '173.194.86.213'
+mysql.init_app(app)
 
 class User(object):
     email = ""
