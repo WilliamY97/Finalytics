@@ -96,9 +96,9 @@ def dashboard():
             return render_template('%s.html' % 'dashboard/production/index2', portfolios = portfolios)
         except Exception as e:
             return render_template('error.html',error = str(e))
-        finally:
-            cursor.close()
-            conn.close()
+
+        cursor.close()
+        conn.close()
 
 
     else:
