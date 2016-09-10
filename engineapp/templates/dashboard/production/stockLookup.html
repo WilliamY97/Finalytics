@@ -10,17 +10,17 @@
     <title>Stock Lookup</title>
 
     <!-- Bootstrap -->
-    <link href="../../../css/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../../../css/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../../../css/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- bootstrap-progressbar -->
-    <link href="../../../css/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../../../css/build/css/custom.min.css" rel="stylesheet">
-    <link href="../../../css/build/css/stock.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/build/css/custom.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/build/css/stock.css')}}" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -405,30 +405,24 @@
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
         <!-- /footer content -->
       </div>
     </div>
 
     <!-- jQuery -->
-    <script src="../../../css/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="{{url_for('static', filename='css/vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
-    <script src="../../../css/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{url_for('static', filename='css/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <!-- FastClick -->
-    <script src="../../../css/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="{{url_for('static', filename='css/vendors/fastclick/lib/fastclick.js')}}"></script>
     <!-- NProgress -->
-    <script src="../../../css/vendors/nprogress/nprogress.js"></script>
+    <script src="{{url_for('static', filename='css/vendors/nprogress/nprogress.js')}}"></script>
     <!-- Chart.js -->
-    <script src="../../../css/vendors/Chart.js/dist/Chart.min.js"></script>
+    <script src="{{url_for('static', filename='css/vendors/Chart.js/dist/Chart.min.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../../../css/build/js/custom.min.js"></script>
-    <script src="../../../css/build/js/stock.js"></script>
+    <script src="{{url_for('static', filename='css/build/js/custom.min.js')}}"></script>
+    <script src="{{url_for('static', filename='css/build/js/stock.js')}}"></script>
 
   </body>
 </html>
