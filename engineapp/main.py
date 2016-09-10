@@ -1,7 +1,7 @@
 import os
 import logging
 from flask.ext.mysql import MySQL
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, json, jsonify, request
 from flask import session, redirect
 from werkzeug import generate_password_hash, check_password_hash
 
