@@ -89,7 +89,7 @@ def submitShares():
     user = cursor.fetchone()[0]
 
     cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
-    userPortfolio = cursor.fetchone()[0]
+    userPortfolio = cursor.fetchone()[0]    
     portfolio[ticker] = Ticker(ticker,quantity)
 
     cursor.execute("select tickers from Portfolio where user_id = %i" % get_user_id())
@@ -98,6 +98,8 @@ def submitShares():
     query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
     cursor.execute(query)
     conn.commit()
+
+    return redirect('/dashboard')
 
 
 @app.route('/')
