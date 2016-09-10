@@ -81,15 +81,34 @@ def submitShares():
     # quantity = request.form['quantity']
     ticker = 'YHOO'
     quantity = 300
-    user = cursor.execute("SELECT id FROM User where email = '%s'" % pickle.loads(session['u2']).email)
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    email = pickle.loads(session['u2']).email
+    print email
+    query = "SELECT id FROM User where email = '%s'" % email
+    print query
+    cursor.execute(query)
+    user = cursor.fetchone()
+    print user
+    print pickle.loads(session['u2']).email
     #user = cursor.User.query.filter_by(email = pickle.loads(session['u2']).email).first()
     userPortfolio = cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
     #userPortfolio = cursor.Portfolio.query.filter_by(user_id = user.id).first()
     portfolio[ticker] = Ticker(ticker,quantity)
-    cursor.callproc('sp_addStock',(pickle.dumps(portfolio), userPortfolio))
-    # query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
-    # cursor.execute(query)
-    cursor.commit()
+    #print pickle.dumps(portfolio)
+    #portfolio = "text"
+    # cursor.callproc('sp_addStock',(portfolio, userPortfolio))
+    query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
+    cursor.execute(query)
+    data = cursor.fetchall()
+    print data
+    if len(data) is 0:
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return jsonify({'message':'User created successfully !'})
+    else:
+        return jsonify({'error':str(data[0])})
 
 
 @app.route('/')
