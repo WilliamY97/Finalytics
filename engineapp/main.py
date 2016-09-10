@@ -123,6 +123,9 @@ def home():
 @app.route('/dashboard')
 def dashboard():
     if session.get('user'):
+        userinfo = pickle.loads(session['u2'])
+        logging.info('username ' + userinfo.get_first_name() + ' ' + userinfo.get_last_name())
+        username = userinfo.get_first_name() + ' ' + userinfo.get_last_name()
         try: 
             cursor.callproc('sp_getPortfolio',(session['user'],))
             result = cursor.fetchall()
@@ -135,9 +138,9 @@ def dashboard():
                         'name': portfolio[0],
                         'symbol': portfolio[1],
                         'cap': portfolio[2]}
-                portfolios.append(portfolio_list)  
+                portfolios.append(portfolio_list)
 
-            return render_template('%s.html' % 'dashboard/production/index2', portfolios = portfolios)
+            return render_template('%s.html' % 'dashboard/production/index2', portfolios = portfolios, username = username)
         except Exception as e:
             return render_template('error.html',error = str(e))
 

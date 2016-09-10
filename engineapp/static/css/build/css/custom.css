@@ -9,6 +9,10 @@
   z-index: 9999;
   position: absolute; }
 
+side-nav {
+  width: 100%;
+}
+
 .nav-sm .container.body .col-md-3.left_col.menu_fixed {
   position: fixed;
   height: 100%; }
