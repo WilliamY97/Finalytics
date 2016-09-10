@@ -120,27 +120,10 @@ def home():
 @app.route('/dashboard')
 def dashboard():
     if session.get('user'):
-        # try: 
-            # cursor.callproc('sp_getPortfolio',(session['user'],))
-            # result = cursor.fetchall()
+        cursor.execute("select tickers from Portfolio where user_id = %i" % get_user_id())
+        port=pickle.loads(cursor.fetchone()[0]).values()
 
-            # logging.info('length of sp_getPortfolio result is ' + len(result))
-            
-            # portfolios = []
-            # for portfolio in result:
-            #     portfolio_list = {
-            #             'name': portfolio[0],
-            #             'symbol': portfolio[1],
-            #             'cap': portfolio[2]}
-            #     portfolios.append(portfolio_list)  
-
-            cursor.execute("select tickers from Portfolio where user_id = %i" % get_user_id())
-            port=pickle.loads(cursor.fetchone()[0]).values()
-
-            return render_template('%s.html' % 'dashboard/production/index2', portfolios = port)
-        # except Exception as e:
-        #     return render_template('error.html',error = str(e))
-
+        return render_template('%s.html' % 'dashboard/production/index2', portfolios = port)
     else:
         return redirect('/login')
 
