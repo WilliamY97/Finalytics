@@ -1,6 +1,6 @@
     {% extends "base.html" %}
     {% block content %}
-    <link href="css/about.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/about.css')}}" rel="stylesheet">
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner carouselimage" role="listbox">
