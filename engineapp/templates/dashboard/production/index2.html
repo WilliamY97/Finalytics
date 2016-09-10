@@ -17,7 +17,7 @@
     <link href="{{url_for('static', filename='css/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="{{url_for('static', filename='css/build/css/custom.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/build/css/custom.css')}}" rel="stylesheet">
       <link rel="import" href="{{url_for('static', filename='elements/side-nav.html')}}">
       <link rel="import" href="{{url_for('static', filename='elements/top-nav.html')}}">
   </head>
@@ -30,7 +30,7 @@
         </div>
 
         <!-- top navigation -->
-        <top-nav></top-nav>
+        <top-nav full-name={{ username }}></top-nav>
         <!-- /top navigation -->
 
         <!-- page content -->
