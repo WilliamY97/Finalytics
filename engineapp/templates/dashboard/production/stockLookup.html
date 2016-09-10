@@ -17,12 +17,12 @@
     <link href="{{url_for('static', filename='css/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- bootstrap-progressbar -->
     <link href="{{url_for('static', filename='css/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet">
-
     <!-- Custom Theme Style -->
     <link href="{{url_for('static', filename='css/build/css/custom.min.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='css/build/css/stock.css')}}" rel="stylesheet">
 
-    
+      <link rel="import" href="{{url_for('static', filename='elements/side-nav.html')}}" async>
+
   </head>
 
   <body class="nav-md">
@@ -30,7 +30,8 @@
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
+            <side-nav></side-nav>
+          {#<div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
               <a class="site_title"> <span><b>Finalytic Dashboard</b></span></a>
             </div>
@@ -159,8 +160,9 @@
               </a>
             </div>
             <!-- /menu footer buttons -->
-          </div>
+          </div>#}
         </div>
+
 
         <!-- top navigation -->
         <div class="top_nav">
@@ -173,7 +175,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="{{url_for('static', filename='images/img.jpg')}}" alt="">John Doe
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -435,5 +437,7 @@
     <script src="{{url_for('static', filename='css/build/js/custom.min.js')}}"></script>
     <script src="{{url_for('static', filename='css/build/js/stock.js')}}"></script>
     <script src="{{url_for('static', filename='js/submitShares.js')}}"></script>  
+    <script src="{{url_for('static', filename='bower_components/platform/platform.js')}}"></script>
+    <script src="{{url_for('static', filename='bower_components/webcomponentsjs/webcomponents.js')}}"></script>
   </body>
 </html>

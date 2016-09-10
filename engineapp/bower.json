@@ -1,0 +1,21 @@
+{
+  "name": "Finalytic",
+  "homepage": "https://github.com/WilliamY97/Finalytics",
+  "authors": [
+    "tylerzhangtextnow <tyler.zhang@enflick.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "polymer/polymer#^1.6.1",
+    "platform": "polymer/platform#^0.4.2"
+  }
+}
