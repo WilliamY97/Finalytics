@@ -13,9 +13,9 @@ app.secret_key = 'why would I tell you my secret key?'
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'superflyinghippocow'
+app.config['MYSQL_DATABASE_PASSWORD'] = ''#'superflyinghippocow'
 app.config['MYSQL_DATABASE_DB'] = 'finalytics'
-app.config['MYSQL_DATABASE_HOST'] = '173.194.86.213'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
 class User(object):
@@ -41,6 +41,7 @@ class User(object):
         return self.last_name       
 
 def addUser(firstname,lastname,email,password):
+    # assert False
     conn = mysql.connect()
     cursor = conn.cursor()
 
@@ -51,9 +52,9 @@ def addUser(firstname,lastname,email,password):
  
     if len(data) is 0:
         conn.commit()
-        return json.dumps({'message':'User created successfully !'})
+        return jsonify({'message':'User created successfully !'})
     else:
-        return json.dumps({'error':str(data[0])})
+        return jsonify({'error':str(data[0])})
 
 def signInUser(logInEmail,logInPassword):
     
@@ -61,9 +62,9 @@ def signInUser(logInEmail,logInPassword):
     cursor = conn.cursor()
     s = cursor.User.query.filter_by(logInEmail = email).first()
     if check_password_hash(s.password,logInPassword):
-        return json.dumps({'html':'<span>Log In Successful!</span>'})
+        return jsonify({'html':'<span>Log In Successful!</span>'})
     else:
-        return json.dumps({'html':'<span>Log In Failed...</span>'})
+        return jsonify({'html':'<span>Log In Failed...</span>'})
 
 @app.route('/')
 def home():
@@ -126,12 +127,12 @@ def signUp():
     _password = request.form['password']
     _confirmpassword = request.form['password_confirm']
     if _password != _confirmpassword:
-        return json.dumps({'html':'<span>Password Confirmation Does Not Match!!</span>'})
+        return jsonify({'html':'<span>Password Confirmation Does Not Match!!</span>'})
     elif _firstname and _lastname and _email and _password:
         addUser(_firstname,_lastname, _email, _password)
-        return json.dumps({'html':'<span>All fields good !!</span>'})
+        return jsonify({'html':'<span>All fields good !!</span>'})
     else:
-        return json.dumps({'html':'<span>Enter the required fields</span>'})
+        return jsonify({'html':'<span>Enter the required fields</span>'})
 
 @app.route('/login')
 def login():
