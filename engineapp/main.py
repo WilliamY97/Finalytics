@@ -64,6 +64,8 @@ def addUser(firstname,lastname,email,password):
  
     if len(data) is 0:
         conn.commit()
+        cursor.close()
+        conn.close()
         return jsonify({'message':'User created successfully !'})
     else:
         return jsonify({'error':str(data[0])})
@@ -92,10 +94,18 @@ def submitShares():
     userPortfolio = cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
     #userPortfolio = cursor.Portfolio.query.filter_by(user_id = user.id).first()
     portfolio[ticker] = Ticker(ticker,quantity)
-    query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
-    cursor.execute(query)
-
-    return redirect('/stockLookup')
+    cursor.callproc('sp_addStock',(pickle.dumps(portfolio), userPortfolio))
+    #query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
+    #cursor.execute(query)
+    data = cursor.fetchall()
+ 
+    if len(data) is 0:
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return jsonify({'message':'User created successfully !'})
+    else:
+        return jsonify({'error':str(data[0])})
 
 
 @app.route('/')
