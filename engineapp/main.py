@@ -172,9 +172,9 @@ def validateLogin():
  
     except Exception as e:
         return render_template('error.html',error = str(e))
-    finally:
-        cursor.close()
-        con.close()
+
+    cursor.close()
+    con.close()
 
 @app.route('/logout')
 def logout():
