@@ -21,9 +21,12 @@
     <!-- Custom Theme Style -->
     <link href="{{url_for('static', filename='css/build/css/custom.min.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='css/build/css/stock.css')}}" rel="stylesheet">
+
+    
   </head>
 
   <body class="nav-md">
+
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -381,6 +384,14 @@
                                   </div>
                                 </div>
                               </div>
+
+                              <!-- submit shares -->
+                              <form method="POST">
+                                <input type="text" name="quantity" placeholder="Quantity of Shares">
+                                <br>
+                                <button type="submit" value="Add to Portfolio">
+                              </form>
+
                             </div>
                           </div>
                         </div>
@@ -423,6 +434,6 @@
     <!-- Custom Theme Scripts -->
     <script src="{{url_for('static', filename='css/build/js/custom.min.js')}}"></script>
     <script src="{{url_for('static', filename='css/build/js/stock.js')}}"></script>
-
+    <script src="{{url_for('static', filename='js/submitShares.js')}}"></script>  
   </body>
 </html>

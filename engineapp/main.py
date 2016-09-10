@@ -17,7 +17,7 @@ mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'derp123'
 app.config['MYSQL_DATABASE_DB'] = 'shit'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_HOST'] = '127.0.0.1'
 mysql.init_app(app)
 
 class User(object):
@@ -40,7 +40,17 @@ class User(object):
 
     def get_last_name(self):
         """Return the last name"""
-        return self.last_name       
+        return self.last_name
+
+class Ticker(object):
+    name = ""
+    quantity = ""
+
+    def __init__(self,name,quantityShares):
+        self.name = name
+        self.quantityShares = quantityShares 
+
+portfolio = {}
 
 def addUser(firstname,lastname,email,password):
     # assert False
@@ -67,6 +77,26 @@ def signInUser(logInEmail,logInPassword):
         return jsonify({'html':'<span>Log In Successful!</span>'})
     else:
         return jsonify({'html':'<span>Log In Failed...</span>'})
+
+
+@app.route('/submitShares', methods=['POST'])
+def submitShares():
+    # ticker = request.form['ticker']
+    # quantity = request.form['quantity']
+    ticker = 'YHOO'
+    quantity = 300
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    user = cursor.execute("SELECT id FROM User where email = '%s'" % pickle.loads(session['u2']).email)
+    #user = cursor.User.query.filter_by(email = pickle.loads(session['u2']).email).first()
+    userPortfolio = cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
+    #userPortfolio = cursor.Portfolio.query.filter_by(user_id = user.id).first()
+    portfolio[ticker] = Ticker(ticker,quantity)
+    query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
+    cursor.execute(query)
+
+    return redirect('/stockLookup')
+
 
 @app.route('/')
 def home():
@@ -106,9 +136,11 @@ def dashboard():
     else:
         return redirect('/login')
 
-@app.route('/stocklookup')
+@app.route('/stocklookup', methods=('POST',))
 def stockLookUp():
     if session.get('user'):
+        conn = mysql.connect()
+        cursor = conn.cursor()
         return render_template('%s.html' % 'dashboard/production/stockLookup')
     else:
         return render_template('error.html',error = 'Unauthorized Access')        
