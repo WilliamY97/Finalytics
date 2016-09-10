@@ -136,7 +136,7 @@ def dashboard():
     else:
         return redirect('/login')
 
-@app.route('/stocklookup', methods=('POST',))
+@app.route('/stocklookup', methods=('GET',))
 def stockLookUp():
     if session.get('user'):
         conn = mysql.connect()
