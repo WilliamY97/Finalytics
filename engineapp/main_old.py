@@ -1,9 +1,20 @@
+import sys
 import os
+import re
+import time
+import codecs
+import hashlib
+import hmac
+import random
+import string
+import webapp2
 import logging
+import jinja2
 # from flask.ext.mysql import MySQL
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, json, flash, request
 from flask import session, redirect
 from werkzeug import generate_password_hash, check_password_hash
+from google.appengine.ext import ndb
 
 app = Flask(__name__)
 
@@ -180,6 +191,3 @@ def validateLogin():
 def logout():
     session.pop('user',None)
     return redirect('/')
-
-if __name__ == '__main__':
-    app.run(debug=True)
