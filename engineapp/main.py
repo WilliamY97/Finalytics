@@ -77,10 +77,12 @@ def signInUser(logInEmail,logInPassword):
 
 @app.route('/submitShares', methods=['POST'])
 def submitShares():
-    # ticker = request.form['ticker']
-    # quantity = request.form['quantity']
-    ticker = 'YHOO'
-    quantity = 300
+    print repr(request.form)
+    print repr(request.data)
+
+    ticker = request.form['ticker']
+    #ticker = "AAPL"
+    quantity = request.form['quantity']
     conn = mysql.connect()
     cursor = conn.cursor()
     email = pickle.loads(session['u2']).email
