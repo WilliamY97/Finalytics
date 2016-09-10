@@ -4,51 +4,17 @@
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
-<!--       <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol> -->
       <div class="carousel-inner carouselimage" role="listbox">
         <div class="item active">
-          <img class="first-slide" src="images/stock2.jpg" alt="First slide">
+          <img class="first-slide" src="{{url_for('static', filename=images/stock2.jpg}}" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
               <h1><b>Finalytics</b></h1>
-<!--               <p>Finalytics brings analyzing financial data to your hands. An all in one dashboard for data visualization, analytics, and insights.</p> -->
               <p><a class="btn btn-lg btn-finalytic" href="#" role="button">Sign up today</a></p>
             </div>
           </div>
         </div>
-<!--         <div class="item">
-          <img class="second-slide" src="images/stock.jpg" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1><b>Dynamic Dashboard</b></h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-              <p><a class="btn btn-lg btn-finalytic" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="third-slide" src="images/stock3.jpg" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1><b>Smart Portfolios</b></h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. </p>
-              <p><a class="btn btn-lg btn-finalytic" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
-        </div> -->
       </div>
-<!--       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a> -->
     </div><!-- /.carousel -->
 
     <div class="overview">
@@ -77,67 +43,5 @@
       </div>
     </div>
 
-<!--         <div class="jumbotron jumboimage">
-            <center>
-                <h1><b>Finalytics<b></h1>
-
-                <p>Finalytics brings analyzing financial data to your hands. An all in one dashboard for data visualization, analytics, and insights.</p>
-                <p><a class="btn btn-finalytic btn-lg" href="#" role="button">Learn more</a></p>
-            </center>
-        </div> -->
-
-
-
-
-<!--         <div class="lander"> 
-            <center>
-                <div class="row"> 
-                    <div class="col-sm-4"> 
-                        <img style="height:275px; width:400px" src="images/col1.svg" alt="Sass and Less support" class="img-responsive">
-                         <h3>Statistical Analysis</h3> 
-                         <p>Register and login to access financial data gathered from various APIs.</p> 
-                    </div> 
-                    <div class="col-sm-4"> 
-                        <img style="height:275px; width:400px" src="images/col2.svg" alt="Responsive across devices" class="img-responsive"> 
-                        <h3>Data Visualization</h3> 
-                        <p>Look at data in gorgeous graphs, forms, plots, and many more tools. </p> 
-                    </div> 
-                    <div class="col-sm-4"> 
-                        <img style="height:275px; width:400px" src="images/col3.svg" alt="Components" class="img-responsive"> 
-                        <h3>Portfolio Assessment</h3> 
-                        <p>Create a portfolio and we can help you review its performance.</p> 
-                    </div> 
-                </div> 
-                <br>
-                <hr class="half-rule"> 
-                <br>
-                <br>
-            <div class = "row">
-            <div class="col-sm-12">
-              <div style = "" class="col-inner content-col">
-                <b>
-                    <h1 style ="margin-top:0px;"> Grab Financial Info, Create Data Visuals, & Make Great Insights.</h1>
-                </b>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p> 
-                
-              </div>
-            </div>
-            </div>
-            </center>
-        </div>
-
-
-        <div class="descrip">
-            <center>
-
-                
-                <b><p class="lead">Finalytics is open source. It's hosted, developed, and maintained on GitHub.</p> </b>
-                <a href="https://github.com/achen831008/Finalytics" class="btn btn-finalytic btn-lg" href="#" role="button">View the GitHub project</a>
-
-
-
-            </center>
-
-        </div>    --> 
 
     {% endblock %}
