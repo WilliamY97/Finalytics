@@ -13,8 +13,8 @@ app.secret_key = 'why would I tell you my secret key?'
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''#'superflyinghippocow'
-app.config['MYSQL_DATABASE_DB'] = 'finalytics'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'derp123'
+app.config['MYSQL_DATABASE_DB'] = 'shit'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
