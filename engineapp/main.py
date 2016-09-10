@@ -89,16 +89,25 @@ def submitShares():
     quantity = 300
     conn = mysql.connect()
     cursor = conn.cursor()
-    user = cursor.execute("SELECT id FROM User where email = '%s'" % pickle.loads(session['u2']).email)
+    email = pickle.loads(session['u2']).email
+    print email
+    query = "SELECT id FROM User where email = '%s'" % email
+    print query
+    cursor.execute(query)
+    user = cursor.fetchone()
+    print user
+    print pickle.loads(session['u2']).email
     #user = cursor.User.query.filter_by(email = pickle.loads(session['u2']).email).first()
     userPortfolio = cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
     #userPortfolio = cursor.Portfolio.query.filter_by(user_id = user.id).first()
     portfolio[ticker] = Ticker(ticker,quantity)
-    cursor.callproc('sp_addStock',(pickle.dumps(portfolio), userPortfolio))
-    #query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
-    #cursor.execute(query)
+    #print pickle.dumps(portfolio)
+    #portfolio = "text"
+    # cursor.callproc('sp_addStock',(portfolio, userPortfolio))
+    query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
+    cursor.execute(query)
     data = cursor.fetchall()
- 
+    print data
     if len(data) is 0:
         conn.commit()
         cursor.close()
