@@ -5,6 +5,8 @@ from flask import Flask, render_template, json, jsonify, request
 from flask import session, redirect
 from werkzeug import generate_password_hash, check_password_hash
 
+import pickle
+
 app = Flask(__name__)
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
@@ -140,6 +142,8 @@ def login():
 
 @app.route('/userHome')
 def userHome():
+    userinfo = pickle.loads(session['u2'])
+
     if session.get('user'):
         logging.info(userinfo.get_first_name())
         return render_template('userHome.html', data= userinfo.get_first_name())
@@ -161,8 +165,8 @@ def validateLogin():
 
         if len(data) > 0:
             if check_password_hash(str(data[0][4]),_password):
-                global userinfo
                 userinfo = User(data[0][3], data[0][1], data[0][2])
+                session['u2'] = pickle.dumps(userinfo)
                 logging.info(userinfo.get_first_name())
                 session['user'] = data[0][0]
                 return redirect('/userHome')
