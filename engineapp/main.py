@@ -127,8 +127,6 @@ def dashboard():
         for k, v in percents.iteritems():
             positionsArray.append([str(k), str(v)])
 
-        print positionsArray
-
         data = requests.get("https://test3.blackrock.com/tools/hackathon/portfolio-analysis", params={'positions': positions, 'calculateRisk': True, 'calculateExposures':True, 'startDate':'20160715'})
         total_risk = data.json()['resultMap'][u'PORTFOLIOS'][0][u'portfolios'][0]['riskData']['totalRisk']
 
