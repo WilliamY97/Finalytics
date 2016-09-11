@@ -6,6 +6,7 @@ from flask import session, redirect
 from werkzeug import generate_password_hash, check_password_hash
 
 import pickle
+import requests
 
 app = Flask(__name__)
 
@@ -115,7 +116,15 @@ def dashboard():
         cursor.execute("select tickers from Portfolio where user_id = %i" % get_user_id())
         port=pickle.loads(cursor.fetchone()[0]).values()
 
-        return render_template('%s.html' % 'dashboard/production/index2', portfolios = port)
+        total_shares = sum([int(stock.quantityShares) for stock in port])
+        percents = {stock.name: float(stock.quantityShares) / total_shares for stock in port}
+        positions = '|'.join(['%s~%f' % (k,v) for k,v in percents.iteritems()])
+
+        data = requests.get("https://test3.blackrock.com/tools/hackathon/portfolio-analysis", params={'positions': positions, 'calculateRisk': True, 'calculateExposures':True, 'startDate':'20160715'})
+        total_risk = data.json()['resultMap'][u'PORTFOLIOS'][0][u'portfolios'][0]['riskData']['totalRisk']
+
+
+        return render_template('dashboard/production/index2.html', portfolios=port, total_risk=total_risk)
     else:
         return redirect('/login')
 
