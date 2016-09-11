@@ -9,7 +9,7 @@ var getNews = function (company) {
 
         $nytHeaderElem.text('Media Articles About Your Portfolio');
         articles = data.response.docs;
-        for(var i = 0; i < 1; i++)
+        for(var i = 0; i < 2; i++)
         {
             var article = articles[i];
             $nytElem.append('<li class="article">' + '<a href="' + article.web_url +'">' + article.headline.main + '</a><a>' + ' -- ' + article.pub_date + '</a>' + '<p>' + article.snippet + '</p>' + '</li>');
