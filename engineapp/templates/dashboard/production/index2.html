@@ -20,6 +20,7 @@
     <link href="{{url_for('static', filename='css/build/css/custom.css')}}" rel="stylesheet">
       <link rel="import" href="{{url_for('static', filename='elements/side-nav.html')}}">
       <link rel="import" href="{{url_for('static', filename='elements/top-nav.html')}}">
+      <link rel="import" href="{{url_for('static', filename='bower_components/google-chart/google-chart.html')}}">
   </head>
 
   <body class="nav-md">
@@ -42,20 +43,15 @@
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Transaction Summary <small>Weekly progress</small></h2>
-                    <div class="filter">
-                      <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                      </div>
-                    </div>
+                    <h2>Performance <small>$10,000 investment</small></h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <div class="col-md-9 col-sm-12 col-xs-12">
-                      <div class="demo-container" style="height:280px">
+                        <div id="returns" style="height: 400px; min-width: 310px; min-height:400px; display:block;"></div>
+                      {#<div class="demo-container" style="height:280px">
                         <div id="placeholder33x" class="demo-placeholder"></div>
-                      </div>
+                      </div>#}
                       <div class="tiles">
                         <div class="col-md-4 tile">
                           <span>Total Capital</span>
@@ -447,15 +443,6 @@
           </div>
         </div>
         <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
       </div>
     </div>
 
@@ -492,8 +479,92 @@
 
     <script src="{{url_for('static', filename='bower_components/platform/platform.js')}}"></script>
     <script src="{{url_for('static', filename='bower_components/webcomponentsjs/webcomponents.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css">
+    <script src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+    <script src="https://www.blackrock.com/tools/api/js/hackathon"></script>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
     <!-- Flot -->
+
+    <script>
+        $(function() {
+          var Aladdin = new blk.API();
+          Aladdin.portfolioAnalysis({
+            positions: 'IVV~50|AAPL~50|',
+            filter: 'countryCode:US'
+          }, function(data) {
+            var portfolio = data.resultMap.PORTFOLIOS[0].portfolios[0];
+            $('#holdings').DataTable({
+              data: portfolio.holdings.map(function(holding) {
+                return [holding.ticker, holding.description, holding.assetType, holding.weight]
+              }),
+              columns: [{
+                title: 'Ticker'
+              }, {
+                title: 'Description'
+              }, {
+                title: 'Asset Type'
+              }, {
+                title: 'Weight'
+              }],
+              order: [
+                [0, 'desc']
+              ]
+            });
+            $('#returns').highcharts('StockChart', {
+              rangeSelector: {
+                selected: 5
+              },
+              series: [{
+                name: 'Portfolio',
+                data: portfolio.returns.performanceChart.map(function(point) {
+                  return [point[0], point[1] * 10000]
+                }),
+                tooltip: {
+                  valueDecimals: 2
+                }
+              }]
+            });
+
+          });
+        });
+
+    </script>
+    <script>
+        google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(drawCrosshairs);
+
+function drawCrosshairs() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'Y/M/D');
+      data.addColumn('number', 'performance');
+
+      data.addRows([
+
+      ]);
+
+      var options = {
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Popularity'
+        },
+        colors: ['#a52714', '#097138'],
+        crosshair: {
+          color: '#000',
+          trigger: 'selection'
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+      chart.setSelection([{row: 38, column: 1}]);
+
+    }
+    </script>
     <script>
       $(document).ready(function() {
         //define chart clolors ( you maybe add more colors if you want or flot will add it automatic )
