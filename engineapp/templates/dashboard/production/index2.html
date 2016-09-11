@@ -62,14 +62,14 @@
                         </div>
                         <div class="col-md-4 tile">
                           <span>Portfolio Return</span>
-                          <h2>{{total_return}}</h2>
+                          <h2 id="final-return">{{total_price}}</h2>
                           <span class="sparkline22 graph" style="height: 160px;">
                                           <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
                                       </span>
                         </div>
                         <div class="col-md-4 tile">
                           <span>Percent Return</span>
-                          <h2>0.11%</h2>
+                          <h2 id="percent-return">0%</h2>
                           <span class="sparkline11 graph" style="height: 160px;">
                                           <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
                                       </span>
@@ -492,6 +492,11 @@
             filter: 'countryCode:US'
           }, function(data) {
             var portfolio = data.resultMap.PORTFOLIOS[0].portfolios[0];
+              var array = portfolio.returns.performanceChart;
+              var last_element = array[array.length - 1];
+              console.log(last_element);
+              $('#final-return').html('$' + (last_element[1] * amount / 100).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
+              $('#percent-return').html(((last_element[1] - 1) * 100).toFixed(2) + "%");
             $('#holdings').DataTable({
               data: portfolio.holdings.map(function(holding) {
                 return [holding.ticker, holding.description, holding.assetType, holding.weight]
