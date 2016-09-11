@@ -80,34 +80,26 @@ def signInUser(logInEmail,logInPassword):
 
 @app.route('/submitShares', methods=['POST'])
 def submitShares():
-    print repr(request.form)
-    print repr(request.data)
-
     ticker = request.form['ticker']
     quantity = request.form['quantity']
-    conn = mysql.connect()
-    cursor = conn.cursor()
     email = pickle.loads(session['u2']).email
-    print email
+
     query = "SELECT id FROM User where email = '%s'" % email
-    print query
     cursor.execute(query)
-    user = cursor.fetchone()
-    print user
-    print pickle.loads(session['u2']).email
-    userPortfolio = cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
+    user = cursor.fetchone()[0]
+
+    cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
+    userPortfolio = cursor.fetchone()[0]    
     portfolio[ticker] = Ticker(ticker,quantity)
+
+    cursor.execute("select tickers from Portfolio where user_id = %i" % get_user_id())
+    port=pickle.loads(cursor.fetchone()[0])
+    portfolio.update(port)
     query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
     cursor.execute(query)
-    data = cursor.fetchall()
-    print data
-    if len(data) is 0:
-        conn.commit()
-        cursor.close()
-        conn.close()
-        return jsonify({'message':'User created successfully !'})
-    else:
-        return jsonify({'error':str(data[0])})
+    conn.commit()
+
+    return redirect('/dashboard')
 
 
 @app.route('/')
