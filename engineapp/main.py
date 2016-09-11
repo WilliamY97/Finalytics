@@ -127,7 +127,7 @@ def dashboard():
         total_risk = data.json()['resultMap'][u'PORTFOLIOS'][0][u'portfolios'][0]['riskData']['totalRisk']
 
         return render_template('dashboard/production/index2.html', portfolios=port, total_risk=round(total_risk, 2), total_price=format_currency(total_price),
-                                total_return=format_currency(total_price*1.11), positions= positions)
+                                total_return=format_currency(total_price*1.11), positions= positions, username=pickle.loads(session['u2']).first_name)
     else:
         return redirect('/login')
 
@@ -199,6 +199,29 @@ def validateLogin():
  
     except Exception as e:
         return render_template('error.html',error = str(e))
+
+@app.route('/delete/<name>')
+def delete(name):
+    name = name.upper()
+    email = pickle.loads(session['u2']).email
+
+    query = "SELECT id FROM User where email = '%s'" % email
+    cursor.execute(query)
+    user = cursor.fetchone()[0]
+
+    cursor.execute("SELECT portfolio_id FROM Portfolio WHERE user_id = %i" % user)
+    userPortfolio = cursor.fetchone()[0]    
+
+    cursor.execute("select tickers from Portfolio where user_id = %i" % get_user_id())
+    port=pickle.loads(cursor.fetchone()[0])
+    portfolio.update(port)
+    del portfolio[name]
+
+    query = 'UPDATE Portfolio SET tickers="%s" WHERE portfolio_id = %i' % (pickle.dumps(portfolio), userPortfolio) 
+    cursor.execute(query)
+    conn.commit()
+
+    return redirect('/dashboard')
 
 @app.route('/logout')
 def logout():
