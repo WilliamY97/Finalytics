@@ -127,7 +127,7 @@ def dashboard():
         total_risk = data.json()['resultMap'][u'PORTFOLIOS'][0][u'portfolios'][0]['riskData']['totalRisk']
 
         return render_template('dashboard/production/index2.html', portfolios=port, total_risk=round(total_risk, 2), total_price=format_currency(total_price),
-                                total_return=format_currency(total_price*1.11))
+                                total_return=format_currency(total_price*1.11), positions= positions)
     else:
         return redirect('/login')
 

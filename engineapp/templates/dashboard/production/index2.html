@@ -491,7 +491,7 @@
         $(function() {
           var Aladdin = new blk.API();
           Aladdin.portfolioAnalysis({
-            positions: 'IVV~50|AAPL~50|',
+            positions: '{{ positions }}',
             filter: 'countryCode:US'
           }, function(data) {
             var portfolio = data.resultMap.PORTFOLIOS[0].portfolios[0];
