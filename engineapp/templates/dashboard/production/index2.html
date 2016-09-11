@@ -83,7 +83,7 @@
                         <div class="x_title">
                           <h2>Portfolio</h2>
                           <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            <li><a href="/stocklookup" class="collapse-link"><i class="fa fa-plus"></i></a>
                             </li>
                             <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
@@ -99,6 +99,7 @@
                           </ul>
                           <div class="clearfix"></div>
                         </div>
+                      <div id="donutchart"></div><div id="donutchart"></div>
                         <ul class="list-unstyled top_profiles scroll-view">
                           {% for portfolio in portfolios %}
                           <li class="media event">
@@ -125,29 +126,29 @@
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-line-chart"></i></div>
-                  <div class="count">15.03%</div>
-                  <h3>Expected Returns</h3>
+                  <div class="count" id="expected-result">0%</div>
+                  <h3>Expected Returns 1YR</h3>
                 </div>
               </div>
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-comments-o"></i></div>
-                  <div class="count">{{total_risk}}%</div>
+                  <div class="icon"><i class="fa fa-exclamation-triangle"></i></div>
+                  <div class="count" id="total-risk">0%</div>
                   <h3>Calculated Risk</h3>
                 </div>
               </div>
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
-                  <div class="count">19.36%</div>
-                  <h3>Exposures</h3>
+                  <div class="icon"><i class="fa fa-level-up"></i></div>
+                  <div class="count" id="up-month">0%</div>
+                  <h3>Up month</h3>
                 </div>
               </div>
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-check-square-o"></i></div>
-                  <div class="count">6.18%</div>
-                  <h3>Volatility</h3>
+                  <div class="icon"><i class="fa fa-level-down"></i></div>
+                  <div class="count" id="down-month">0%</div>
+                  <h3>Down month</h3>
                 </div>
               </div>
             </div>
@@ -484,6 +485,34 @@
     <!-- Flot -->
 
     <script>
+        google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+          var strArr = decodeHtml("{{ percents }}");
+          var arr = eval(strArr);
+          var reformattedArray = arr.map(function(obj){
+               robj = [obj[0], parseInt(obj[1]*100)];
+               return robj;
+            });
+          reformattedArray.unshift(['a', 'b']);
+          console.log(reformattedArray);
+
+        var data = google.visualization.arrayToDataTable(reformattedArray);
+        var options = {
+          pieHole: 0.4
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+      function decodeHtml(html) {
+            var txt = document.createElement("textarea");
+            txt.innerHTML = html;
+            return txt.value;
+        }
+    </script>
+
+    <script>
         $(function() {
           var Aladdin = new blk.API();
           var amount ="{{ total_price }}".replace(/\D/g,'');
@@ -494,9 +523,16 @@
             var portfolio = data.resultMap.PORTFOLIOS[0].portfolios[0];
               var array = portfolio.returns.performanceChart;
               var last_element = array[array.length - 1];
-              console.log(last_element);
+              var risk = (portfolio.returns.latestPerf.oneYearRisk * 100).toFixed(2) + "%";
+              var down = (portfolio.returns.downMonthsPercent * 100).toFixed(2) + "%";
+              var up = (99.7 - (portfolio.returns.downMonthsPercent * 100)).toFixed(2) + "%";
+              var expected = (portfolio.returns.highReturn * 100).toFixed(2) + "%";
               $('#final-return').html('$' + (last_element[1] * amount / 100).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
               $('#percent-return').html(((last_element[1] - 1) * 100).toFixed(2) + "%");
+              $('#total-risk').html(risk);
+              $('#up-month').html(up);
+              $('#down-month').html(down);
+              $('#expected-result').html(expected);
             $('#holdings').DataTable({
               data: portfolio.holdings.map(function(holding) {
                 return [holding.ticker, holding.description, holding.assetType, holding.weight]

@@ -118,16 +118,22 @@ def dashboard():
     if session.get('user'):
         cursor.execute("select tickers from Portfolio where user_id = %i" % get_user_id())
         port=pickle.loads(cursor.fetchone()[0]).values()
-
         total_price = sum([int(stock.quantityShares) * float(requests.get('http://finance.yahoo.com/d/quotes.csv', params={'s':stock.name, 'f':'a'}).content[:-1]) for stock in port])
         percents = {stock.name: float(int(stock.quantityShares) * float(requests.get('http://finance.yahoo.com/d/quotes.csv', params={'s':stock.name, 'f':'a'}).content[:-1])) / total_price for stock in port}
+
         positions = '|'.join(['%s~%f' % (k,v) for k,v in percents.iteritems()])
+
+        positionsArray = []
+        for k, v in percents.iteritems():
+            positionsArray.append([str(k), str(v)])
+
+        print positionsArray
 
         data = requests.get("https://test3.blackrock.com/tools/hackathon/portfolio-analysis", params={'positions': positions, 'calculateRisk': True, 'calculateExposures':True, 'startDate':'20160715'})
         total_risk = data.json()['resultMap'][u'PORTFOLIOS'][0][u'portfolios'][0]['riskData']['totalRisk']
 
         return render_template('dashboard/production/index2.html', portfolios=port, total_risk=round(total_risk, 2), total_price=format_currency(total_price),
-                                total_return=format_currency(total_price*1.11), positions= positions, username=pickle.loads(session['u2']).first_name)
+                                total_return=format_currency(total_price*1.11), positions= positions, percents=positionsArray, username=pickle.loads(session['u2']).first_name)
     else:
         return redirect('/login')
 
