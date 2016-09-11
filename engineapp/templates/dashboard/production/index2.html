@@ -517,7 +517,7 @@
                 name: 'Portfolio',
                 type: 'area',
                 data: portfolio.returns.performanceChart.map(function(point) {
-                  return [point[0], point[1] * amount]
+                  return [point[0], point[1] * amount / 100]
                 }),
                 tooltip: {
                   valueDecimals: 2
