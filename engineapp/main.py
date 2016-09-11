@@ -221,6 +221,8 @@ def delete(name):
     cursor.execute(query)
     conn.commit()
 
+    return redirect('/dashboard')
+
 @app.route('/logout')
 def logout():
     session.pop('user',None)
