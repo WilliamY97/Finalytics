@@ -1,2 +1,2 @@
 # Finalytics
-PennApps 2016 Fall
+A data visualization platform that helps users assess their portfolios — Edit
