@@ -1,6 +1,11 @@
 # Finalytics
 
+Solarized dark             |  Solarized Ocean
+:-------------------------:|:-------------------------:
+
+![Reference Image](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/408/247/datas/gallery.jpg)  |  
 ![Reference Image](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/408/247/datas/gallery.jpg)
+
 
 ##Note
 
