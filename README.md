@@ -14,9 +14,9 @@ Since the development of this project at PennApps 2016, the Alladin API used to 
 
 ## Awards
 
-- Top Finance Hack 2016 at PennApps
-- Top Data Visualization Hack 2016 at PennApps
-- 2nd Place Hack by Sponsor Qualtrics 2016 at PennApps
+- Top Finance Hack 2016 at PennApps Spring 2016
+- Top Data Visualization Hack 2016 at PennApps Spring 2016
+- 2nd Place Hack by Sponsor Qualtrics 2016 at PennApps Spring 2016
 
 
 
