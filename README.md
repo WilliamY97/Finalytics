@@ -4,7 +4,7 @@
 - Top Data Visualization Hack 2016 at PennApps Spring 2016
 - 2nd Place Hack by Sponsor Qualtrics 2016 at PennApps Spring 2016
 
-![Reference Image](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/408/247/datas/gallery.jpg)
+![Reference Image](https://github.com/WilliamY97/Finalytics/blob/master/finalytics.jpg)
 
 ## About
 
