@@ -1,8 +1,9 @@
 # Finalytics
 
 - Top Finance Hack 2016 at PennApps Spring 2016
-- Top Data Visualization Hack 2016 at PennApps Spring 2016
-- 2nd Place Hack by Sponsor Qualtrics 2016 at PennApps Spring 2016
+- Top Data Visualization from Qualtrics Inc.
+- Honourable mention Best Use of History Hack
+- Honourable mention Best User Interface Hack
 
 ![Reference Image](https://github.com/WilliamY97/Finalytics/blob/master/finalytics.jpg)
 
